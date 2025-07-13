@@ -13,12 +13,12 @@ datasource db {
 
 model Book {
   id           Int      @id @default(autoincrement())
-  name         String
+  name         String   @unique
   abbreviation String
   testament    String
   bookOrder    Int
-  Verses       Verse[]
-  Bookmarks    Bookmark[]
+  verses       Verse[]
+  bookmarks    Bookmark[]
 }
 
 model Verse {

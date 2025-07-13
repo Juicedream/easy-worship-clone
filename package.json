@@ -2,11 +2,19 @@
   "name": "easy-worship-clone",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma:seed": "node prisma/seed.js",
+    "prisma:seed:verses": "node prisma/seed-verses.js",
+    "prisma:seed:full-kjv": "node prisma/seed-full-kjv.js",
+    "build-full-kjv": "node scripts/build-full-kjv.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^6.11.1",
@@ -25,6 +33,6 @@
     "eslint-config-next": "15.3.5",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "typescript": "^5.8.3"
   }
 }
