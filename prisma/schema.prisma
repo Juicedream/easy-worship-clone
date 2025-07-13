@@ -30,6 +30,7 @@ model Verse {
   translation String
   Book        Book   @relation(fields: [bookId], references: [id])
   @@index([bookId, chapter, verse])
+  ProjectedVerse ProjectedVerse[]
 }
 
 model Bookmark {
@@ -41,4 +42,10 @@ model Bookmark {
   note      String?
   createdAt DateTime @default(now())
   Book      Book     @relation(fields: [bookId], references: [id])
+}
+model ProjectedVerse {
+  id      Int    @id @default(autoincrement())
+  verseId Int
+  verse   Verse  @relation(fields: [verseId], references: [id])
+  createdAt DateTime @default(now())
 }
