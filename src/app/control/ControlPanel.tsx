@@ -313,7 +313,7 @@ export default function ControlPanel() {
           <select
             value={selectedBook}
             onChange={(e) => setSelectedBook(e.target.value)}
-            className="px-3 py-2 border rounded"
+            className="px-3 py-2 border bg-black rounded"
           >
             <option value="">Select Book</option>
             {bibleBooks.map((book) => (

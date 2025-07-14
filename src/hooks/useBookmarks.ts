@@ -1,5 +1,18 @@
-import { Bookmark } from "@/generated/prisma";
+
 import { useEffect, useState } from "react";
+
+export type Bookmark = {
+  id: number;
+  userId: string;
+  bookId: number;
+  chapter: number;
+  verse: number;
+  note: string | null;
+  createdAt: string;
+  Book?: {
+    name?: string;
+  };
+};
 
 export function useBookmarks(userId: string) {
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
@@ -47,6 +60,15 @@ export function useBookmarks(userId: string) {
     });
   }
 
+   async function updateBookmarkNote(id: number, note: string) {
+     await fetch(`/api/bookmarks/${id}`, {
+       method: "PUT",
+       body: JSON.stringify({ note }),
+       headers: {
+         "Content-Type": "application/json",
+       },
+     });
+   }
 
   /** true if this verse is already bookmarked */
   const isBookmarked = (bookId: number, chapter: number, verse: number) =>
@@ -54,5 +76,5 @@ export function useBookmarks(userId: string) {
       (b:any) => b.bookId === bookId && b.chapter === chapter && b.verse === verse
     );
 
-  return { bookmarks, addBookmark, removeBookmark, isBookmarked, deleteBookmark, loading };
+  return { bookmarks, addBookmark, removeBookmark, isBookmarked, deleteBookmark, updateBookmarkNote, loading };
 }
