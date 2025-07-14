@@ -41,3 +41,9 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json(bookmarks);
 }
+
+export async function DELETE(req: NextRequest) {
+  const { id } = await req.json(); // bookmark.id
+  await prisma.bookmark.delete({ where: { id } });
+  return NextResponse.json({ success: true });
+}
