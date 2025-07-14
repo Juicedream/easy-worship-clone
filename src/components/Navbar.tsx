@@ -3,7 +3,7 @@ import Link from "next/link";
 const Navbar = () => {
   return (
     <nav className="p-4 flex gap-4 bg-zinc-900 shadow">
-      {["bible", "search", "bookmarks", "presentations"].map((p) => (
+      {["bible", "search", "control", "projector"].map((p) => (
         <Link
           key={p}
           href={`/${p}`}
