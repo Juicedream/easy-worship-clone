@@ -1,5 +1,6 @@
 "use client";
 
+import BookmarkButton from "@/components/BookmarkButton";
 import { useMutation, useStorage, useStorageRoot } from "@liveblocks/react";
 import { useEffect, useState } from "react";
 
@@ -10,6 +11,7 @@ type Verse = {
   chapter: number;
   verse: number;
   text: string;
+  bookId: number;
 };
 
 export default function ControlPanel() {
@@ -105,6 +107,7 @@ export default function ControlPanel() {
     chapter: v.chapter,
     verse: v.verse,
     text: v.text,
+    bookId: v.bookId
   });
 
   // Search by query
@@ -356,6 +359,12 @@ export default function ControlPanel() {
             {currentVerse.book} {currentVerse.chapter}:{currentVerse.verse}
           </strong>
           <p className="mt-2">{currentVerse.text}</p>
+          <BookmarkButton
+            userId="demo-user"
+            bookId={currentVerse.bookId}
+            chapter={currentVerse.chapter}
+            verse={currentVerse.verse}
+          />
         </div>
       ) : (
         <p>No verse selected</p>
