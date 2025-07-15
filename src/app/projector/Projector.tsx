@@ -55,11 +55,18 @@ export default function Projector() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
-            className={`text-6xl font-bold ${theme === "light" ? "text-black":"text-white"} leading-snug max-w-5xl text-center`}
+            className={`${
+              (verse as any).text.length >= 200 ? "text-5xl" : "text-6xl "
+            } font-bold ${
+              theme === "light" ? "text-black" : "text-white"
+            } leading-snug max-w-5xl text-center`}
           >
-            {`"${(verse as any).text}"`}
+            {`${(verse as any).text}`}
           </motion.div>
         </AnimatePresence>
+      </div>
+      <div className="text-2xl text-gray-600 mb-2 uppercase">
+       {(verse as any).translation} version
       </div>
       <div className="absolute bottom-4 right-4 text-sm opacity-50">
         Press <strong>F</strong> for fullscreen | <strong>T</strong> to toggle

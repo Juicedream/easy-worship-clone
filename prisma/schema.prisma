@@ -19,6 +19,8 @@ model Book {
   bookOrder    Int
   verses       Verse[]
   bookmarks    Bookmark[]
+
+  ProjectionLog ProjectionLog[]
 }
 
 model Verse {
@@ -48,4 +50,14 @@ model ProjectedVerse {
   verseId Int
   verse   Verse  @relation(fields: [verseId], references: [id])
   createdAt DateTime @default(now())
+}
+
+model ProjectionLog {
+  id         Int      @id @default(autoincrement())
+  userId     String
+  bookId     Int
+  chapter    Int
+  verse      Int
+  timestamp  DateTime @default(now())
+  Book       Book     @relation(fields: [bookId], references: [id])
 }

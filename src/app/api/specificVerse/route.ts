@@ -5,9 +5,9 @@ import { prisma } from "@/lib/db";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { book, chapter, verse, specific } = body;
+    const { book, chapter, verse, specific, translation } = body;
 
-    console.log("Received request:", { book, chapter, verse, specific });
+    console.log("Received request:", { book, chapter, verse, specific, translation });
 
     // Validate required fields
     if (!book || !chapter || !verse) {
@@ -67,6 +67,7 @@ export async function POST(request: NextRequest) {
         bookId: bookExists.id,
         chapter: chapterNum,
         verse: verseNum,
+        translation: "KJV"
       },
       include: {
         Book: true,
