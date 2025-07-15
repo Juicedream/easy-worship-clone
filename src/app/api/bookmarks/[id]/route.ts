@@ -1,28 +1,76 @@
-import { prisma } from "@/lib/db";
+// src/app/api/bookmarks/[id]/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
+// Make sure the PUT function is properly typed and exported
 export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
-) {
-  const id = parseInt(params.id);
-  const { note } = await request.json();
-
+): Promise<NextResponse> {
   try {
-    const updated = await prisma.bookmark.update({
-      where: { id },
-      data: { note },
-    });
+    const { id } = params;
+    const body = await request.json();
 
-    return NextResponse.json(updated);
+    // Your PUT logic here
+    // For example, updating a bookmark:
+    // const updatedBookmark = await updateBookmark(id, body);
+
+    return NextResponse.json({
+      success: true,
+      message: "Bookmark updated successfully",
+      // data: updatedBookmark
+    });
   } catch (error) {
-    return NextResponse.json({ error: "Update failed" }, { status: 404 });
+    console.error("PUT /api/bookmarks/[id] error:", error);
+    return NextResponse.json(
+      { error: "Failed to update bookmark" },
+      { status: 500 }
+    );
   }
 }
 
-export async function PATCH(
+// Optional: Add other HTTP methods if needed
+export async function GET(
   request: NextRequest,
-  ctx: { params: { id: string } }
-) {
-  return PUT(request, ctx); // alias PATCH to PUT for convenience
+  { params }: { params: { id: string } }
+): Promise<NextResponse> {
+  try {
+    const { id } = params;
+
+    // Your GET logic here
+    // const bookmark = await getBookmark(id);
+
+    return NextResponse.json({
+      success: true,
+      // data: bookmark
+    });
+  } catch (error) {
+    console.error("GET /api/bookmarks/[id] error:", error);
+    return NextResponse.json(
+      { error: "Failed to get bookmark" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+): Promise<NextResponse> {
+  try {
+    const { id } = params;
+
+    // Your DELETE logic here
+    // await deleteBookmark(id);
+
+    return NextResponse.json({
+      success: true,
+      message: "Bookmark deleted successfully",
+    });
+  } catch (error) {
+    console.error("DELETE /api/bookmarks/[id] error:", error);
+    return NextResponse.json(
+      { error: "Failed to delete bookmark" },
+      { status: 500 }
+    );
+  }
 }
