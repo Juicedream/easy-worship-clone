@@ -1,26 +1,32 @@
 // src/app/api/bookmarks/[id]/route.ts
-import { NextRequest, NextResponse } from "next/server";
+// ✅ App‑Router compliant dynamic‑route handler
+//    • first arg:  Web `Request`
+//    • second arg: `{ params }` context (no extra types)
+//    • return:     `Response` | `NextResponse`
 
-// Make sure the PUT function is properly typed and exported
+import { NextResponse } from "next/server";
+
+/* --------------------------------------------------
+   PUT /api/bookmarks/[id]
+   --------------------------------------------------*/
 export async function PUT(
-  request: NextRequest,
+  request: Request,
   { params }: { params: { id: string } }
-): Promise<NextResponse> {
+) {
   try {
     const { id } = params;
     const body = await request.json();
 
-    // Your PUT logic here
-    // For example, updating a bookmark:
-    // const updatedBookmark = await updateBookmark(id, body);
+    // TODO: update bookmark in DB -> `updateBookmark(id, body)`
+    // const updated = await updateBookmark(id, body);
 
     return NextResponse.json({
       success: true,
       message: "Bookmark updated successfully",
-      // data: updatedBookmark
+      // data: updated,
     });
-  } catch (error) {
-    console.error("PUT /api/bookmarks/[id] error:", error);
+  } catch (err) {
+    console.error("PUT /api/bookmarks/[id] error", err);
     return NextResponse.json(
       { error: "Failed to update bookmark" },
       { status: 500 }
@@ -28,23 +34,21 @@ export async function PUT(
   }
 }
 
-// Optional: Add other HTTP methods if needed
+/* --------------------------------------------------
+   GET /api/bookmarks/[id]
+   --------------------------------------------------*/
 export async function GET(
-  request: NextRequest,
+  _request: Request,
   { params }: { params: { id: string } }
-): Promise<NextResponse> {
+) {
   try {
     const { id } = params;
-
-    // Your GET logic here
+    // TODO: fetch bookmark -> `getBookmark(id)`
     // const bookmark = await getBookmark(id);
 
-    return NextResponse.json({
-      success: true,
-      // data: bookmark
-    });
-  } catch (error) {
-    console.error("GET /api/bookmarks/[id] error:", error);
+    return NextResponse.json({ success: true /*, data: bookmark */ });
+  } catch (err) {
+    console.error("GET /api/bookmarks/[id] error", err);
     return NextResponse.json(
       { error: "Failed to get bookmark" },
       { status: 500 }
@@ -52,22 +56,24 @@ export async function GET(
   }
 }
 
+/* --------------------------------------------------
+   DELETE /api/bookmarks/[id]
+   --------------------------------------------------*/
 export async function DELETE(
-  request: NextRequest,
+  _request: Request,
   { params }: { params: { id: string } }
-): Promise<NextResponse> {
+) {
   try {
     const { id } = params;
-
-    // Your DELETE logic here
+    // TODO: delete bookmark -> `deleteBookmark(id)`
     // await deleteBookmark(id);
 
     return NextResponse.json({
       success: true,
       message: "Bookmark deleted successfully",
     });
-  } catch (error) {
-    console.error("DELETE /api/bookmarks/[id] error:", error);
+  } catch (err) {
+    console.error("DELETE /api/bookmarks/[id] error", err);
     return NextResponse.json(
       { error: "Failed to delete bookmark" },
       { status: 500 }
