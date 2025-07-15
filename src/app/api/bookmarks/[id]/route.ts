@@ -14,7 +14,7 @@ export async function GET(request: Request, { params }: RouteParams) {
   if (isNaN(bookmarkId)) {
     return NextResponse.json({ error: "Invalid bookmark ID" }, { status: 400 });
   }
-
+// suppose to wwokr
   try {
     const bookmark = await prisma.bookmark.findUnique({
       where: { id: bookmarkId },
