@@ -38,7 +38,7 @@ export default function BookmarkButton(props: Props) {
         onClick={() => removeBookmark(bm!.id)}
         className="ml-2 text-red-500"
       >
-        📌
+        📌 Remove bookmark
       </button>
     );
   }
