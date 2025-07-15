@@ -9,6 +9,8 @@ const filePath = path.join(process.cwd(), "lib", "full-kjv.json");
 console.log("📖 Loading:", filePath);
 const fullKJV = JSON.parse(fs.readFileSync(filePath, "utf8"));
 
+
+
 async function seedFullKJV() {
   for (const [bookName, chapters] of Object.entries(fullKJV)) {
     const book = await prisma.book.findUnique({ where: { name: bookName } });
